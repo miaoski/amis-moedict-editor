@@ -13,3 +13,5 @@ function editme(href) {
 	var lexicon = href.split('/')[3].slice(2);
 	alert('我還沒寫好! 要修改的是: ' + lexicon);
 }
+
+exportFunction(editme, window, {defineAs: 'editme'});
