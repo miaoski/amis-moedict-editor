@@ -15,9 +15,12 @@
 			"js": ["amis-editor.js"]
 		}
 	],
-	"applications": {
-		"gecko": {
-			"id": "miaoski@gmail.com"
-		}
-	}
+	"browser_specific_settings": {
+		"gecko": { "id": "amis-editor@miaoski.idv.tw" }
+	},
+	"options_ui": {
+		"open_in_tab": true,
+		"page": "prefs.html"
+	},
+	"permissions": [ "storage" ]
 }
