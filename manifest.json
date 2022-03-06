@@ -12,7 +12,7 @@
 	"content_scripts": [
 		{
 			"matches": ["*://amis.moedict.tw/*"],
-			"js": ["amis-editor.js"]
+			"js": [ "jquery-3.6.0.min.js", "amis-editor.js" ]
 		}
 	],
 	"browser_specific_settings": {
@@ -22,5 +22,8 @@
 		"open_in_tab": true,
 		"page": "prefs.html"
 	},
-	"permissions": [ "storage" ]
+	"permissions": [
+		"storage",
+		"<all_urls>"
+	]
 }

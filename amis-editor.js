@@ -1,4 +1,6 @@
 let token = "ghp_";
+let myrepo = 'miaoski/amis-moedict';
+let branch = 'safulo-draft';
 
 // moedict amis safulo only
 if(location.href.split('/')[3].slice(0, 2) == '#:') {
@@ -13,7 +15,30 @@ if(location.href.split('/')[3].slice(0, 2) == '#:') {
 
 function editme(href) {
 	var lexicon = href.split('/')[3].slice(2);
-	alert('我還沒寫好! 要修改的是: ' + lexicon);
+	if(token == "ghp_") {
+		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
+		return 0;
+	}
+
+	get_lexicon(lexicon).then(e => console.log(content.value));
+}
+
+async function get_lexicon(word) {
+	url = `https://raw.githubusercontent.com/${myrepo}/${branch}/amis-deploy/s/${word}.json`;
+	console.log(url);
+	const ret = await (await fetch(url)).json();
+	return ret;
+}
+
+function update_lexicon(word, content) {
+	var data = JSON.stringify({
+		"message": `修改 ${word}`,
+		"content": content
+	});
+	var headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
 }
 
 function onError(error) {
