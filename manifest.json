@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+	"name": "moedict-amis-editor",
+	"version": "0.1",
+	"description": "Edit an entry in amis.moedict.tw and submit it to a branch on Github. 阿美語萌典的線上編輯器，修改的內容會上傳到 Github 的 safulo-draft 分支。",
+
+	"icons": {
+		"48": "icons/amis-48.png",
+		"96": "icons/amis-96.png"
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["*://amis.moedict.tw/*"],
+			"js": ["amis-editor.js"]
+		}
+	],
+	"applications": {
+		"gecko": {
+			"id": "miaoski@gmail.com"
+		}
+	}
+}
