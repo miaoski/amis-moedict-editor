@@ -20,7 +20,7 @@ function editme(href) {
 		return 0;
 	}
 
-	get_lexicon(lexicon).then(e => console.log(content.value));
+	get_lexicon(lexicon).then(e => console.log(e));
 }
 
 async function get_lexicon(word) {
