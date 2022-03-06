@@ -13,32 +13,80 @@ if(location.href.split('/')[3].slice(0, 2) == '#:') {
 	// Not Safulo dict. Ignore it.
 }
 
+// https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
+function b64DecodeUnicode(str) {
+	// Going backwards: from bytestream, to percent-encoding, to original string.
+	return decodeURIComponent(atob(str).split('').map(function(c) {
+		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	}).join(''));
+}
+
+function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode(parseInt(p1, 16))
+    }))
+}
+
 function editme(href) {
-	var lexicon = href.split('/')[3].slice(2);
+	var word = href.split('/')[3].slice(2);
 	if(token == "ghp_") {
 		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
 		return 0;
 	}
 
-	get_lexicon(lexicon).then(e => console.log(e));
+	get_lexicon(word).then(e => {
+		sha = e.sha;
+		data = JSON.parse(b64DecodeUnicode(e.content));
+		console.log(sha);
+		console.log(data);
+
+		data['extra'] = '測試中';
+		update_lexicon(word, sha, data);
+	});
 }
 
-async function get_lexicon(word) {
-	url = `https://raw.githubusercontent.com/${myrepo}/${branch}/amis-deploy/s/${word}.json`;
+function get_lexicon(word) {
+	var config = {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/vnd.github.v3+json',
+			'Authorization': `Bearer ${token}`
+		}
+	};
+	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json?ref=safulo-draft`;
 	console.log(url);
-	const ret = await (await fetch(url)).json();
+	const ret = fetch(url, config)
+		.then(response => response.json())
+
 	return ret;
 }
 
-function update_lexicon(word, content) {
-	var data = JSON.stringify({
-		"message": `修改 ${word}`,
-		"content": content
-	});
-	var headers = {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        };
+function update_lexicon(word, sha, content) {
+	var config = {
+		method: 'PUT',
+		headers: {
+			'Authorization': `Bearer ${token}`,
+			'Accept': 'application/vnd.github.v3+json',
+			'Content-Type': 'application/json'
+		},
+		body: new URLSearchParams({
+			"message": `Update ${word}`,
+			"content": b64EncodeUnicode(JSON.stringify(content)),
+			'branch': branch,
+			'sha': sha
+		})
+	};
+	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
+	console.log(url);
+	console.log(config);
+	fetch(url, config)
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 }
 
 function onError(error) {
