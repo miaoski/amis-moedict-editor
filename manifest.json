@@ -11,8 +11,9 @@
 
 	"content_scripts": [
 		{
-			"matches": ["*://amis.moedict.tw/*"],
-			"js": [ "jquery-3.6.0.min.js", "amis-editor.js" ]
+			"matches": [ "*://amis.moedict.tw/*" ],
+			"js": [ "jquery-3.6.0.min.js", "amis-editor.js", "app/build/static/js/main.2da60c48.js" ],
+			"css": [ "app/build/static/css/main.db90688a.css" ]
 		}
 	],
 	"browser_specific_settings": {
@@ -24,6 +25,7 @@
 	},
 	"permissions": [
 		"storage",
-		"<all_urls>"
+		"<all_urls>",
+		"activeTab"
 	]
 }

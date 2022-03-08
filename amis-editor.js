@@ -2,8 +2,15 @@ let token = "ghp_";
 let myrepo = 'miaoski/amis-moedict';
 let branch = 'safulo-draft';
 
+const hidePage = `body > :not(.root) {
+                    display: none;
+                  }`;
+
 // moedict amis safulo only
 if(location.href.split('/')[3].slice(0, 2) == '#:') {
+	const root = document.createElement("div");
+	root.setAttribute("id", "root");
+	document.body.insertBefore(root, null);
 	document.querySelectorAll('nav').forEach( e => {
 		e.innerHTML = e.innerHTML.replace(
 			'"http://ckhis.ck.tp.edu.tw/~ljm/amis-mp/" target="_blank"', '"javascript:editme(location.href);"').replace(
@@ -79,6 +86,8 @@ function update_lexicon(word, sha, content) {
 	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
 	console.log(url);
 	console.log(config);
+	alert('Saved!');
+	/*
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
@@ -87,6 +96,7 @@ function update_lexicon(word, sha, content) {
 		.catch((error) => {
 			console.error('Error:', error);
 		});
+	*/
 }
 
 function onError(error) {
