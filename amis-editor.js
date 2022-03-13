@@ -5,12 +5,14 @@ let branch = 'safulo-draft';
 const hidePage = `body > :not(.root) {
                     display: none;
                   }`;
+const rootBlockCSS = 'position: absolute; top: 20px; left: 0; z-index:10;'
 
 // moedict amis safulo only
 if(location.href.split('/')[3].slice(0, 2) == '#:') {
 	const root = document.createElement("div");
 	root.setAttribute("id", "root");
 	document.body.insertBefore(root, null);
+	document.getElementById('root').style = rootBlockCSS + ' display: none;';
 	document.querySelectorAll('nav').forEach( e => {
 		e.innerHTML = e.innerHTML.replace(
 			'"http://ckhis.ck.tp.edu.tw/~ljm/amis-mp/" target="_blank"', '"javascript:editme(location.href);"').replace(
@@ -41,6 +43,7 @@ function editme(href) {
 		return 0;
 	}
 
+	document.getElementById('root').style = rootBlockCSS + ' display: block;';
 	get_lexicon(word).then(e => {
 		sha = e.sha;
 		data = JSON.parse(b64DecodeUnicode(e.content));
@@ -48,7 +51,7 @@ function editme(href) {
 		console.log(data);
 
 		data['extra'] = '測試中';
-		update_lexicon(word, sha, data);
+		// update_lexicon(word, sha, data);
 	});
 }
 
@@ -86,7 +89,7 @@ function update_lexicon(word, sha, content) {
 	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
 	console.log(url);
 	console.log(config);
-	alert('Saved!');
+	alert('TODO: Uncomment the save function! Check console.log()');
 	/*
 	fetch(url, config)
 		.then(response => response.json())
