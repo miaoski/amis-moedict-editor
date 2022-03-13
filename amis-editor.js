@@ -5,7 +5,7 @@ let branch = 'safulo-draft';
 const hidePage = `body > :not(.root) {
                     display: none;
                   }`;
-const rootBlockCSS = 'position: absolute; top: 20px; left: 0; z-index:10;'
+const rootBlockCSS = 'position: absolute; top: 20px; left: 0; z-index:300;'
 
 // moedict amis safulo only
 if(location.href.split('/')[3].slice(0, 2) == '#:') {
