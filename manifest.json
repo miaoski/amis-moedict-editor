@@ -9,11 +9,17 @@
 	},
 	"content_scripts": [
 		{
-			"js": [ "jquery-3.6.0.min.js", "amis-editor.js", "app/build/static/js/main.2da60c48.js" ],
-			"css": [ "app/build/static/css/main.db90688a.css" ]
 			"matches": [
 				"*://amis.moedict.tw/*"
 			],
+			"js": [
+				"jquery-3.6.0.min.js",
+				"amis-editor.js",
+				"app/build/static/js/main.cea4bfbc.js"
+			],
+			"css": [
+				"app/build/static/css/main.be7b0b0c.css"
+			]
 		}
 	],
 	"browser_specific_settings": {
