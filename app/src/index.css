@@ -1,8 +1,11 @@
-:root {
-  --border-radius: 5px;
+body {
+  margin: 0;
 }
 
-body {
+#amis-moeditor {
+  font-size: 16px;
+  --border-radius: 5px;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     Noto Sans CJK TC, Source Han Sans TW, Microsoft Jhenghei, '微軟正黑體',
@@ -10,26 +13,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  margin: 0;
-
   color: hsl(50, 20%, 30%);
   background-color: hsl(50, 20%, 85%);
 }
 
-code,
-input {
+#amis-moeditor code,
+#amis-moeditor input {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-label {
+#amis-moeditor label {
   opacity: 0.625;
 }
 
-label,
-h1,
-h2,
-h3 {
+#amis-moeditor label,
+#amis-moeditor h1,
+#amis-moeditor h2,
+#amis-moeditor h3 {
   font-size: small;
   font-weight: bold;
   text-transform: uppercase;
@@ -38,19 +39,19 @@ h3 {
   line-height: 1em;
 }
 
-input,
-button {
+#amis-moeditor input,
+#amis-moeditor button {
   border: none;
   border-radius: var(--border-radius);
   padding: 0.25em 0.5em;
   line-height: 1em;
 }
 
-input:disabled {
+#amis-moeditor input:disabled {
   background-color: hsl(50, 20%, 90%);
 }
 
-button {
+#amis-moeditor button {
   font-weight: bold;
   text-transform: capitalize;
   color: inherit;
@@ -59,25 +60,27 @@ button {
   align-items: center;
 }
 
-button svg {
+#amis-moeditor button svg {
   margin: 0 0.5em;
+  background: none;
+  border: none;
 }
 
-button svg:first-child {
+#amis-moeditor button svg:first-child {
   margin-left: 0;
 }
 
-button svg:last-child {
+#amis-moeditor button svg:last-child {
   margin-right: 0;
 }
 
-button.text {
+#amis-moeditor button.text {
   background: none;
   text-transform: inherit;
   padding: inherit;
 }
 
-hr {
+#amis-moeditor hr {
   border: none;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }

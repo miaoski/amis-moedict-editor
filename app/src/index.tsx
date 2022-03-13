@@ -11,7 +11,9 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <section id="amis-moeditor">
+        <App />
+      </section>
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')

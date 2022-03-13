@@ -1,33 +1,33 @@
-.App header h1 {
-  padding: 1rem;
+#amis-moeditor header h1 {
+  padding: 1em;
   text-transform: capitalize;
-  font-size: 1rem;
+  font-size: 1em;
   text-align: center;
   border-bottom: 1px solid hsl(200, 50%, 80%);
 }
 
-.fields {
+#amis-moeditor .fields {
   background-color: hsl(50, 50%, 92.5%);
-  padding: 1rem;
+  padding: 1em;
 }
 
-.grid {
+#amis-moeditor .grid {
   display: grid;
-  column-gap: 1rem;
-  row-gap: 0.5rem;
+  column-gap: 1em;
+  row-gap: 0.5em;
 }
 
-.field {
+#amis-moeditor .field {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
-.required {
+#amis-moeditor .required {
   position: relative;
 }
 
-.required:after {
+#amis-moeditor .required:after {
   content: '*';
   color: hsl(0, 75%, 50%);
   position: absolute;
@@ -35,111 +35,113 @@
   top: calc(50% - 0.5em);
 }
 
-#word {
+#amis-moeditor #word {
   grid-template-columns: repeat(3, 1fr);
 }
 
 @media screen and (max-width: 768px) {
-  #word {
+  #amis-moeditor #word {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (max-width: 480px) {
-  #word {
+  #amis-moeditor #word {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
-h2.heteronym {
+#amis-moeditor h2.heteronym {
   color: #fff;
   background-color: hsl(200, 80%, 50%);
   border-width: 1px 0;
-  margin: 1rem -1rem;
-  padding: 1rem;
+  margin: 1em -1em;
+  padding: 1em;
 }
 
-h2.heteronym.grid {
+#amis-moeditor h2.heteronym.grid {
   grid-template-columns: auto auto 1fr auto;
   align-items: center;
 }
 
-h2.heteronym.grid button.icon {
-  margin: -1rem;
+#amis-moeditor h2.heteronym.grid button.icon {
+  margin: -1em;
 }
 
-h2.heteronym.grid button.deleteHeteronym {
+#amis-moeditor h2.heteronym.grid button.deleteHeteronym {
   background-color: transparent;
   color: hsl(10, 20%, 100%);
   box-shadow: 0 0 0 1px hsl(10, 20%, 100%);
 }
 
-.definition .grid {
+#amis-moeditor .definition .grid {
   grid-template-columns: auto auto 1fr auto;
   column-gap: 0;
 }
 
-.definition .grid button.deleteDefinition {
+#amis-moeditor .definition .grid button.deleteDefinition {
   background: transparent;
   box-shadow: 0 0 0 1px inset hsl(10, 50%, 80%);
   color: hsl(10, 50%, 60%);
 }
 
-.definitionItem .grid {
+#amis-moeditor .definitionItem .grid {
   border-left: 2px hsl(200, 20%, 80%) solid;
-  margin-left: 0.5rem;
-  padding-left: 0.5rem;
+  margin-left: 0.5em;
+  padding-left: 0.5em;
+  border-width: 0 0 0 2px;
 }
 
-.definitionItem .grid button {
+#amis-moeditor .definitionItem .grid button {
   align-self: flex-end;
   background: transparent;
   box-shadow: 0 0 0 1px inset hsl(10, 50%, 80%);
   color: hsl(10, 50%, 60%);
 }
 
-.addDefinitionItem {
-  margin-left: 0.5rem;
-  padding-left: 0.5rem;
+#amis-moeditor .addDefinitionItem {
+  margin-left: 0.5em;
+  padding-left: 0.5em;
 }
 
-.addDefinitionItem button {
+#amis-moeditor .addDefinitionItem button {
   background: transparent;
   box-shadow: 0 0 0 1px inset hsl(80, 70%, 50%);
   color: hsl(80, 80%, 40%);
 }
 
-.example.grid {
+#amis-moeditor .example.grid {
   grid-template-columns: 1fr 1fr 1fr auto;
+  background: none;
 }
 
 @media screen and (max-width: 480px) {
-  .example.grid {
+  #amis-moeditor .example.grid {
     grid-template-columns: 1fr;
   }
 }
 
-.reference.grid,
+#amis-moeditor .reference.grid,
 .synonym.grid {
   grid-template-columns: 1fr auto;
 }
 
-.addDefinition {
+#amis-moeditor .addDefinition {
   background: transparent;
   box-shadow: 0 0 0 1px inset hsl(80, 70%, 50%);
   color: hsl(80, 80%, 40%);
 }
 
-.App footer {
+#amis-moeditor footer {
   grid-template-columns: auto 1fr auto;
   border-top: 1px solid hsl(200, 50%, 80%);
-  padding: 1rem;
+  padding: 1em;
 }
 
-.App footer .submit,
-.App footer .addHeteronym {
-  font-size: 1rem;
-  padding: 0.7rem 1rem;
+#amis-moeditor footer .submit,
+#amis-moeditor footer .addHeteronym {
+  font-size: 1em;
+  padding: 0.7em 1em;
   background-color: hsl(200, 80%, 50%);
   color: hsl(200, 50%, 95%);
 }
