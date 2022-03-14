@@ -109,7 +109,7 @@ window.update_lexicon = function update_lexicon(
 		.then(data => {
 			console.log('update_lexicon: Success:', data);
 			if (onSuccess) {
-				onSuccess;
+				onSuccess();
 			}
 		})
 		.catch(error => {
