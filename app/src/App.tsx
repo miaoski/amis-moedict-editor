@@ -26,6 +26,14 @@ function App() {
   const [sha, setSha] = useState<string | null | undefined>();
   const [data, setData] = useState<Entry>();
 
+  const openNewForm = () => {
+    setIsOpen(true);
+    setWord('');
+    setSha(null);
+    setData({
+      t: '',
+      h: [],
+    });
   };
 
   const openEditForm = () => {
