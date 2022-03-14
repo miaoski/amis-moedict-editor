@@ -11,16 +11,18 @@ import './App.css';
 const _window = window as any;
 
 function App() {
-  const { dict, word } = getDictWord(window.location.hash);
+  // for react app preview only
+  // const { dict, word } = getDictWord(window.location.hash);
+  // const { data: previewData } = useQuery('draft', async () => {
+  //   const res = await fetch(getJSONUrl({ dict, word }));
+  //   if (!res.ok) {
+  //     throw new Error('Failed to fetch draft');
+  //   }
+  //   return res.json();
+  // });
 
-  const { data: previewData } = useQuery('draft', async () => {
-    const res = await fetch(getJSONUrl({ dict, word }));
-    if (!res.ok) {
-      throw new Error('Failed to fetch draft');
-    }
-    return res.json();
-  });
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [word, setWord] = useState<string | undefined>();
   const [sha, setSha] = useState();
   const [data, setData] = useState();
 
@@ -32,36 +34,37 @@ function App() {
         setData(data);
       }
     };
-    if (dict && word) {
+    if (isOpen && word) {
       getLexicon();
     }
-  }, []);
+  }, [isOpen, word]);
+
+  const updateLexicon = async (data: Entry) => {
   };
 
-  const updatLexicon = async (data: Entry) => {
     _window.update_lexicon(word, sha, data);
   const openEditor = () => {
+    const { word } = getDictWord(window.location.hash);
+    setWord(word);
+    setIsOpen(true);
   };
 
-  if (!dict) {
-    return <p>dictionary not defined</p>;
-  }
-  if (!word) {
-    return <p>word not defined</p>;
-  }
-  if (!data && !previewData) {
-    console.warn('lexicon not loaded');
-    return <p>loading...</p>;
-  }
+  const closeEditor = () => {
+    _window.close_editor();
+    setIsOpen(false);
+    setWord(undefined);
+  };
 
-  return (
   $(':contains("編輯本條目")').on('mouseup', openEditor);
+
+  return data && isOpen ? (
     <Form
-      draft={convertToForm(data || previewData)}
-      updatLexicon={updatLexicon}
-      closeEditor={_window.close_editor}
+      word={word}
+      draft={convertToForm(data)}
+      updateLexicon={updateLexicon}
+      closeEditor={closeEditor}
     />
-  );
+  ) : null;
 }
 
 export default App;

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   UseFormRegister,
   UseFormSetValue,
@@ -12,8 +13,9 @@ import { Entry, EntryForm } from '../utilities/types';
 import Heteronym from './FormHeteronym';
 
 interface Props {
+  word: string | undefined;
   draft: EntryForm;
-  updatLexicon: (data: Entry) => void;
+  updateLexicon: (data: Entry) => void;
   closeEditor: () => void;
 }
 
@@ -24,11 +26,18 @@ export interface BlockProps {
 }
 
 function Form(props: Props) {
-  const { draft, updatLexicon, closeEditor } = props;
+  const { word, draft, updateLexicon, closeEditor } = props;
 
   const { register, setValue, watch, handleSubmit } = useForm<EntryForm>({
     defaultValues: draft,
   });
+
+  useEffect(() => {
+    setValue('title', draft.title);
+    setValue('stem', draft.stem);
+    setValue('repetition', draft.repetition);
+    setValue('heteronyms', draft.heteronyms);
+  }, [draft]);
 
   const addHeteronym = () => {
     setValue(`heteronyms.${watch('heteronyms').length}`, {
@@ -44,10 +53,18 @@ function Form(props: Props) {
   };
 
   const onSubmit = (data: EntryForm) => {
-    updatLexicon(convertToJson(data));
+    updateLexicon(convertToJson(data));
   };
 
   const formData = watch();
+
+  if (word && draft.title && word !== draft.title) {
+    return (
+      <header>
+        <h1>loading...</h1>
+      </header>
+    );
+  }
 
   return (
     <form className="App" onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +80,7 @@ function Form(props: Props) {
             <label>
               <span className="required">title</span>
             </label>
-            <input {...register('title', { required: true, disabled: true })} />
+            <input readOnly {...register('title', { required: true })} />
           </div>
           <div className="field">
             <label>stem (蔡中涵大辭典)</label>
