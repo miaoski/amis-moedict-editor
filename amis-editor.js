@@ -9,7 +9,7 @@ const rootBlockCSS =
 	'position: absolute; top: 53px; left: 0; right: 0; z-index:300;';
 
 // moedict amis safulo only
-if (location.href.split('/')[3].slice(0, 2) == '#:') {
+if(location.href.split('/')[3].slice(0, 2) == '#:') {
 	const root = document.createElement('div');
 	root.setAttribute('id', 'root');
 	document.body.insertBefore(root, null);
@@ -32,7 +32,7 @@ function b64DecodeUnicode(str) {
 	return decodeURIComponent(
 		atob(str)
 			.split('')
-			.map(function (c) {
+			.map(function(c) {
 				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 			})
 			.join('')
@@ -41,14 +41,14 @@ function b64DecodeUnicode(str) {
 
 function b64EncodeUnicode(str) {
 	return btoa(
-		encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+		encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
 			return String.fromCharCode(parseInt(p1, 16));
 		})
 	);
 }
 
 function editme() {
-	if (token == 'ghp_') {
+	if(token == 'ghp_') {
 		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
 		return 0;
 	}
@@ -105,13 +105,13 @@ window.update_lexicon = function update_lexicon(
 		.then(response => response.json())
 		.then(data => {
 			console.log('update_lexicon: Success:', data);
-			if (onSuccess) {
+			if(onSuccess) {
 				onSuccess();
 			}
 		})
 		.catch(error => {
 			console.error('update_lexicon: Error:', error);
-			if (onError) {
+			if(onError) {
 				onError();
 			}
 		});
@@ -122,7 +122,7 @@ function onError(error) {
 }
 
 function onGot(item) {
-	if (item.token) {
+	if(item.token) {
 		token = item.token;
 	}
 }
