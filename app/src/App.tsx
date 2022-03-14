@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import $ from 'jquery';
 
 import { Entry } from './utilities/types';
 import { convertToForm, getDictWord, getJSONUrl } from './utilities/helpers';
@@ -35,9 +36,11 @@ function App() {
       getLexicon();
     }
   }, []);
+  };
 
   const updatLexicon = async (data: Entry) => {
     _window.update_lexicon(word, sha, data);
+  const openEditor = () => {
   };
 
   if (!dict) {
@@ -52,6 +55,7 @@ function App() {
   }
 
   return (
+  $(':contains("編輯本條目")').on('mouseup', openEditor);
     <Form
       draft={convertToForm(data || previewData)}
       updatLexicon={updatLexicon}
