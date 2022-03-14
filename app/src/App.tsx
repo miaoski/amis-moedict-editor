@@ -55,7 +55,10 @@ function App() {
     setWord(undefined);
   };
 
-  $(':contains("編輯本條目")').on('mouseup', openEditor);
+  useEffect(() => {
+    $('button:contains("編輯本條目")').on('mouseup', openEditForm);
+    $('button:contains("新增條目")').on('mouseup', openNewForm);
+  }, []);
 
   return data && isOpen ? (
     <Form
