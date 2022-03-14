@@ -79,7 +79,13 @@ window.get_lexicon = async function get_lexicon(word) {
 	return result;
 };
 
-window.update_lexicon = function update_lexicon(word, sha, content) {
+window.update_lexicon = function update_lexicon(
+	word,
+	sha,
+	content,
+	onSuccess,
+	onError
+) {
 	console.log('update_lexicon: lexicon json', content);
 	var config = {
 		method: 'PUT',
@@ -102,9 +108,15 @@ window.update_lexicon = function update_lexicon(word, sha, content) {
 		.then(response => response.json())
 		.then(data => {
 			console.log('update_lexicon: Success:', data);
+			if (onSuccess) {
+				onSuccess;
+			}
 		})
 		.catch(error => {
 			console.error('update_lexicon: Error:', error);
+			if (onError) {
+				onError();
+			}
 		});
 };
 

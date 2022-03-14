@@ -40,9 +40,9 @@ function App() {
   }, [isOpen, word]);
 
   const updateLexicon = async (data: Entry) => {
+    _window.update_lexicon(word, sha, data, closeEditor);
   };
 
-    _window.update_lexicon(word, sha, data);
   const openEditor = () => {
     const { word } = getDictWord(window.location.hash);
     setWord(word);
