@@ -56,6 +56,10 @@ function editme() {
 	document.getElementById('root').style = rootBlockCSS + ' display: block;';
 }
 
+window.close_editor = function close_editor() {
+	document.getElementById('root').style = rootBlockCSS + ' display: none;';
+};
+
 window.get_lexicon = async function get_lexicon(word) {
 	var config = {
 		method: 'GET',

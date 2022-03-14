@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
+import { MdWarning } from 'react-icons/md';
 import { CgChevronDown, CgChevronRight } from 'react-icons/cg';
 
 import { Heteronym } from '../utilities/types';
 
 import Definition from './FormHeteronymDefinition';
 import { BlockProps } from './Form';
-import { MdWarning } from 'react-icons/md';
 
 export type HeteronymId = `heteronyms.${number}`;
 export type DefinitionVisibility = boolean[];

@@ -2,13 +2,14 @@ import {
   UseFormRegister,
   UseFormSetValue,
   UseFormWatch,
+  useForm,
 } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import { MdAdd, MdSave } from 'react-icons/md';
+import { MdAdd, MdClose, MdSave } from 'react-icons/md';
 
-import Heteronym from './FormHeteronym';
 import { convertToJson } from '../utilities/helpers';
 import { Entry, EntryForm } from '../utilities/types';
+
+import Heteronym from './FormHeteronym';
 
 interface Props {
   draft: EntryForm;
@@ -28,25 +29,33 @@ function Form(props: Props) {
   const { register, setValue, watch, handleSubmit } = useForm<EntryForm>({
     defaultValues: draft,
   });
+
   const addHeteronym = () => {
     setValue(`heteronyms.${watch('heteronyms').length}`, {
       name: '',
       definitions: [],
     });
   };
+
   const deleteHeteronym = (index: number) => {
     const heteronyms = watch(`heteronyms`) || [];
     heteronyms.splice(index, 1);
     setValue(`heteronyms`, heteronyms);
   };
+
   const onSubmit = (data: EntryForm) => {
     updatLexicon(convertToJson(data));
   };
+
   const formData = watch();
+
   return (
     <form className="App" onSubmit={handleSubmit(onSubmit)}>
       <header>
         <h1>edit lexicon</h1>
+        <button type="button" onClick={closeEditor}>
+          <MdClose />
+        </button>
       </header>
       <section className="fields">
         <div id="word" className="grid">
@@ -93,6 +102,10 @@ function Form(props: Props) {
         <button type="submit" className="submit">
           <MdSave />
           <span>save lexicon</span>
+        </button>
+        <button type="button" className="cancel" onClick={closeEditor}>
+          <MdClose />
+          <span>cancel</span>
         </button>
       </footer>
     </form>

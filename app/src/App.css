@@ -1,9 +1,18 @@
+#amis-moeditor header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-bottom: 1px solid hsl(200, 50%, 80%);
+}
+
 #amis-moeditor header h1 {
   padding: 1em;
   text-transform: capitalize;
   font-size: 1em;
   text-align: center;
-  border-bottom: 1px solid hsl(200, 50%, 80%);
+}
+
+#amis-moeditor header button {
+  background: none;
 }
 
 #amis-moeditor .fields {
@@ -133,15 +142,22 @@
 }
 
 #amis-moeditor footer {
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   border-top: 1px solid hsl(200, 50%, 80%);
   padding: 1em;
 }
 
-#amis-moeditor footer .submit,
-#amis-moeditor footer .addHeteronym {
+#amis-moeditor footer button {
   font-size: 1em;
   padding: 0.7em 1em;
+}
+
+#amis-moeditor footer .submit,
+#amis-moeditor footer .addHeteronym {
   background-color: hsl(200, 80%, 50%);
   color: hsl(200, 50%, 95%);
+}
+
+#amis-moeditor footer .cancel {
+  background: none;
 }
