@@ -21,10 +21,33 @@ function App() {
   //   return res.json();
   // });
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [word, setWord] = useState<string | undefined>();
-  const [sha, setSha] = useState();
-  const [data, setData] = useState();
+  const [sha, setSha] = useState<string | null | undefined>();
+  const [data, setData] = useState<Entry>();
+
+  };
+
+  const openEditForm = () => {
+    const { word } = getDictWord(window.location.hash);
+    setWord(word);
+    setIsOpen(true);
+  };
+
+  const closeForm = () => {
+    _window.close_editor();
+    setIsOpen(false);
+    setWord(undefined);
+  };
+
+  const updateLexicon = async (data: Entry) => {
+    _window.update_lexicon(word, sha, data, closeForm);
+  };
+
+  useEffect(() => {
+    $('button:contains("編輯本條目")').on('mouseup', openEditForm);
+    $('button:contains("新增條目")').on('mouseup', openNewForm);
+  }, []);
 
   useEffect(() => {
     const getLexicon = async () => {
@@ -39,33 +62,12 @@ function App() {
     }
   }, [isOpen, word]);
 
-  const updateLexicon = async (data: Entry) => {
-    _window.update_lexicon(word, sha, data, closeEditor);
-  };
-
-  const openEditor = () => {
-    const { word } = getDictWord(window.location.hash);
-    setWord(word);
-    setIsOpen(true);
-  };
-
-  const closeEditor = () => {
-    _window.close_editor();
-    setIsOpen(false);
-    setWord(undefined);
-  };
-
-  useEffect(() => {
-    $('button:contains("編輯本條目")').on('mouseup', openEditForm);
-    $('button:contains("新增條目")').on('mouseup', openNewForm);
-  }, []);
-
   return data && isOpen ? (
     <Form
       word={word}
       draft={convertToForm(data)}
       updateLexicon={updateLexicon}
-      closeEditor={closeEditor}
+      closeForm={closeForm}
     />
   ) : null;
 }

@@ -16,7 +16,7 @@ interface Props {
   word: string | undefined;
   draft: EntryForm;
   updateLexicon: (data: Entry) => void;
-  closeEditor: () => void;
+  closeForm: () => void;
 }
 
 export interface BlockProps {
@@ -26,7 +26,7 @@ export interface BlockProps {
 }
 
 function Form(props: Props) {
-  const { word, draft, updateLexicon, closeEditor } = props;
+  const { word, draft, updateLexicon, closeForm } = props;
 
   const { register, setValue, watch, handleSubmit } = useForm<EntryForm>({
     defaultValues: draft,
@@ -70,7 +70,7 @@ function Form(props: Props) {
     <form className="App" onSubmit={handleSubmit(onSubmit)}>
       <header>
         <h1>edit lexicon</h1>
-        <button type="button" onClick={closeEditor}>
+        <button type="button" onClick={closeForm}>
           <MdClose />
         </button>
       </header>
@@ -120,7 +120,7 @@ function Form(props: Props) {
           <MdSave />
           <span>save lexicon</span>
         </button>
-        <button type="button" className="cancel" onClick={closeEditor}>
+        <button type="button" className="cancel" onClick={closeForm}>
           <MdClose />
           <span>cancel</span>
         </button>
