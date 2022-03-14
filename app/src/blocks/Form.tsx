@@ -80,7 +80,10 @@ function Form(props: Props) {
             <label>
               <span className="required">title</span>
             </label>
-            <input readOnly {...register('title', { required: true })} />
+            <input
+              readOnly={!!word}
+              {...register('title', { required: true })}
+            />
           </div>
           <div className="field">
             <label>stem (蔡中涵大辭典)</label>
