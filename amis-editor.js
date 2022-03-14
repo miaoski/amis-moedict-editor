@@ -61,8 +61,8 @@ function editme(href) {
     get_lexicon(word).then((e) => {
         sha = e.sha;
         data = JSON.parse(b64DecodeUnicode(e.content));
-        console.log(sha);
-        console.log(data);
+        console.log('sha = ' + sha);
+        // console.log(data);
 
         data['extra'] = '測試中';
         // update_lexicon(word, sha, data);
@@ -78,7 +78,7 @@ function get_lexicon(word) {
         },
     };
     url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json?ref=safulo-draft`;
-    console.log(url);
+    // console.log(url);
     const ret = fetch(url, config).then((response) => response.json());
 
     return ret;
