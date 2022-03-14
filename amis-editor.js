@@ -86,24 +86,21 @@ window.update_lexicon = function update_lexicon(
 	onSuccess,
 	onError
 ) {
-	console.log('update_lexicon: lexicon json', content);
+	const body_msg = {
+			'message': `Update ${word}`,
+			'content': b64EncodeUnicode(JSON.stringify(content)),
+			'branch': branch,
+			'sha': sha,
+		};
 	var config = {
 		method: 'PUT',
 		headers: {
-			Authorization: `Bearer ${token}`,
-			Accept: 'application/vnd.github.v3+json',
-			'Content-Type': 'application/json',
+			'authorization': `Bearer ${token}`,
+			'accept': 'application/vnd.github.v3+json',
 		},
-		body: new URLSearchParams({
-			message: `Update ${word}`,
-			content: b64EncodeUnicode(JSON.stringify(content)),
-			branch: branch,
-			sha: sha,
-		}),
+		body: JSON.stringify(body_msg),
 	};
 	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
-	console.log('update_lexicon: url', url);
-	console.log('update_lexicon: config', config);
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
