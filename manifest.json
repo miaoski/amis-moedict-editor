@@ -9,17 +9,13 @@
 	},
 	"content_scripts": [
 		{
-			"matches": [
-				"*://amis.moedict.tw/*"
-			],
+			"matches": ["*://amis.moedict.tw/*"],
 			"js": [
 				"jquery-3.6.0.min.js",
 				"amis-editor.js",
-				"app/build/static/js/main.cea4bfbc.js"
+				"app/build/static/js/main.896ede7a.js"
 			],
-			"css": [
-				"app/build/static/css/main.be7b0b0c.css"
-			]
+			"css": ["app/build/static/css/main.fd1e9075.css"]
 		}
 	],
 	"browser_specific_settings": {
@@ -31,9 +27,5 @@
 		"open_in_tab": true,
 		"page": "prefs.html"
 	},
-	"permissions": [
-		"storage",
-		"<all_urls>",
-		"activeTab"
-	]
+	"permissions": ["storage", "<all_urls>", "activeTab"]
 }
