@@ -42,7 +42,11 @@ function Form(props: Props) {
   const addHeteronym = () => {
     setValue(`heteronyms.${watch('heteronyms').length}`, {
       name: '',
-      definitions: [],
+      definitions: [
+        {
+          description: '',
+        },
+      ],
     });
   };
 
