@@ -1,12 +1,18 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
+import { Entry } from './utilities/types';
 import { convertToForm, getDictWord, getJSONUrl } from './utilities/helpers';
 import Form from './blocks/Form';
+
 import './App.css';
+
+const _window = window as any;
 
 function App() {
   const { dict, word } = getDictWord(window.location.hash);
-  const { data, isLoading, error } = useQuery('draft', async () => {
+
+  const { data: previewData } = useQuery('draft', async () => {
     const res = await fetch(getJSONUrl({ dict, word }));
     if (!res.ok) {
       throw new Error('Failed to fetch draft');
@@ -14,22 +20,44 @@ function App() {
     return res.json();
   });
 
+  const [sha, setSha] = useState();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const getLexicon = async () => {
+      const { sha, data } = await _window.get_lexicon(word);
+      if (sha && data) {
+        setSha(sha);
+        setData(data);
+      }
+    };
+    if (dict && word) {
+      getLexicon();
+    }
+  }, []);
+
+  const updatLexicon = async (data: Entry) => {
+    _window.update_lexicon(word, sha, data);
+  };
+
   if (!dict) {
     return <p>dictionary not defined</p>;
   }
   if (!word) {
     return <p>word not defined</p>;
   }
-  if (isLoading) {
+  if (!data && !previewData) {
+    console.warn('lexicon not loaded');
     return <p>loading...</p>;
   }
-  if (error) {
-    return <p>{JSON.stringify(error)}</p>;
-  }
-  if (!data) {
-    return <p>word not found</p>;
-  }
-  return <Form draft={convertToForm(data)} />;
+
+  return (
+    <Form
+      draft={convertToForm(data || previewData)}
+      updatLexicon={updatLexicon}
+      closeEditor={_window.close_editor}
+    />
+  );
 }
 
 export default App;

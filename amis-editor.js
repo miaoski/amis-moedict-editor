@@ -18,7 +18,7 @@ if (location.href.split('/')[3].slice(0, 2) == '#:') {
 		e.innerHTML = e.innerHTML
 			.replace(
 				'"http://ckhis.ck.tp.edu.tw/~ljm/amis-mp/" target="_blank"',
-				'"javascript:editme(location.href);"'
+				'"javascript:editme();"'
 			)
 			.replace('幫校對', '編輯本條目');
 	});
@@ -47,26 +47,16 @@ function b64EncodeUnicode(str) {
 	);
 }
 
-function editme(href) {
-	var word = href.split('/')[3].slice(2);
+function editme() {
 	if (token == 'ghp_') {
 		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
 		return 0;
 	}
 
 	document.getElementById('root').style = rootBlockCSS + ' display: block;';
-	get_lexicon(word).then(e => {
-		sha = e.sha;
-		data = JSON.parse(b64DecodeUnicode(e.content));
-		console.log(sha);
-		console.log(data);
-
-		data['extra'] = '測試中';
-		// update_lexicon(word, sha, data);
-	});
 }
 
-function get_lexicon(word) {
+window.get_lexicon = async function get_lexicon(word) {
 	var config = {
 		method: 'GET',
 		headers: {
@@ -75,12 +65,18 @@ function get_lexicon(word) {
 		},
 	};
 	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json?ref=safulo-draft`;
-	console.log(url);
-	const ret = fetch(url, config).then(response => response.json());
-	return ret;
-}
+	const res = await fetch(url, config);
+	const json = await res.json();
 
-function update_lexicon(word, sha, content) {
+	const result = {
+		sha: json.sha,
+		data: JSON.parse(b64DecodeUnicode(json.content)),
+	};
+	return result;
+};
+
+window.update_lexicon = function update_lexicon(word, sha, content) {
+	console.log('update_lexicon: lexicon json', content);
 	var config = {
 		method: 'PUT',
 		headers: {
@@ -96,20 +92,17 @@ function update_lexicon(word, sha, content) {
 		}),
 	};
 	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
-	console.log(url);
-	console.log(config);
-	alert('TODO: Uncomment the save function! Check console.log()');
-	/*
+	console.log('update_lexicon: url', url);
+	console.log('update_lexicon: config', config);
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
-			console.log('Success:', data);
+			console.log('update_lexicon: Success:', data);
 		})
-		.catch((error) => {
-			console.error('Error:', error);
+		.catch(error => {
+			console.error('update_lexicon: Error:', error);
 		});
-	*/
-}
+};
 
 function onError(error) {
 	console.log(`Error: ${error}`);

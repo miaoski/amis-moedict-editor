@@ -8,10 +8,12 @@ import { MdAdd, MdSave } from 'react-icons/md';
 
 import Heteronym from './FormHeteronym';
 import { convertToJson } from '../utilities/helpers';
-import { EntryForm } from '../utilities/types';
+import { Entry, EntryForm } from '../utilities/types';
 
 interface Props {
   draft: EntryForm;
+  updatLexicon: (data: Entry) => void;
+  closeEditor: () => void;
 }
 
 export interface BlockProps {
@@ -21,7 +23,7 @@ export interface BlockProps {
 }
 
 function Form(props: Props) {
-  const { draft } = props;
+  const { draft, updatLexicon, closeEditor } = props;
 
   const { register, setValue, watch, handleSubmit } = useForm<EntryForm>({
     defaultValues: draft,
@@ -38,7 +40,7 @@ function Form(props: Props) {
     setValue(`heteronyms`, heteronyms);
   };
   const onSubmit = (data: EntryForm) => {
-    console.log(convertToJson(data));
+    updatLexicon(convertToJson(data));
   };
   const formData = watch();
   return (
