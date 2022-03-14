@@ -13,6 +13,7 @@
 
 #amis-moeditor header button {
   background: none;
+  margin-right: 1em;
 }
 
 #amis-moeditor .fields {
