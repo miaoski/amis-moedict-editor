@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import $ from 'jquery';
 
 import { Entry } from './utilities/types';
 import { convertToForm, getDictWord, getJSONUrl } from './utilities/helpers';

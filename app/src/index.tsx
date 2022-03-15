@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import $ from 'jquery';
 
 import reportWebVitals from './reportWebVitals';
 import App from './App';
