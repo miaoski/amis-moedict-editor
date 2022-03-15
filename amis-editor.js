@@ -5,26 +5,30 @@ let branch = 'safulo-draft';
 const hidePage = `body > :not(.root) {
                     display: none;
                   }`;
-const rootBlockCSS =
-	'position: absolute; top: 53px; left: 0; right: 0; z-index:300;';
 
-// moedict amis safulo only
-if(location.href.split('/')[3].slice(0, 2) == '#:') {
-	const root = document.createElement('div');
-	root.setAttribute('id', 'root');
-	document.body.insertBefore(root, null);
-	document.getElementById('root').style = rootBlockCSS + ' display: none;';
-	document.querySelectorAll('nav').forEach(e => {
-		e.innerHTML = e.innerHTML
-			.replace(
-				'"http://ckhis.ck.tp.edu.tw/~ljm/amis-mp/" target="_blank"',
-				'"javascript:editme();"'
-			)
-			.replace('幫校對', '編輯本條目');
-	});
-} else {
-	// Not Safulo dict. Ignore it.
-}
+const turnOnEditor = () => {
+	// moedict amis safulo only
+	if (location.href.split('/')[3].slice(0, 2) == '#:') {
+		$('body').append(`
+			<div id="root"
+				style="position: absolute; inset: 53px 0 0 0; z-index:300; display: none;">
+			</div>
+		`);
+		$('li:contains("幫校對")').html(`
+			<a href="javascript:editme();">
+				<i class="icon-edit"></i>
+				編輯本條目
+			</a>
+		`);
+	} else {
+		// Not Safulo dict. Ignore it.
+	}
+};
+
+// after dom ready
+$(function () {
+	turnOnEditor();
+});
 
 // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
 function b64DecodeUnicode(str) {
@@ -52,12 +56,11 @@ function editme() {
 		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
 		return 0;
 	}
-
-	document.getElementById('root').style = rootBlockCSS + ' display: block;';
+	$('#root').show();
 }
 
 window.close_editor = function close_editor() {
-	document.getElementById('root').style = rootBlockCSS + ' display: none;';
+	$('#root').hide();
 };
 
 window.get_lexicon = async function get_lexicon(word) {
