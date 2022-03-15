@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import $ from 'jquery';
 
 import { Entry } from './utilities/types';
 import { convertToForm, getDictWord, getJSONUrl } from './utilities/helpers';
@@ -53,8 +52,8 @@ function App() {
   };
 
   useEffect(() => {
-    $('button:contains("編輯本條目")').on('mouseup', openEditForm);
-    $('button:contains("新增條目")').on('mouseup', openNewForm);
+    $('a:contains("編輯本條目")').on('mouseup', openEditForm);
+    $('a:contains("新增條目")').on('mouseup', openNewForm);
   }, []);
 
   useEffect(() => {

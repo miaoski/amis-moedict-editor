@@ -8,16 +8,18 @@ import './index.css';
 
 const queryClient = new QueryClient();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <section id="amis-moeditor">
-        <App />
-      </section>
-    </QueryClientProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+$(function () {
+  ReactDOM.render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <section id="amis-moeditor">
+          <App />
+        </section>
+      </QueryClientProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
