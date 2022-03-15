@@ -20,6 +20,16 @@ const turnOnEditor = () => {
 				編輯本條目
 			</a>
 		`);
+		$('ul:contains("編輯本條目")').after(
+			`<ul class="nav pull-right hidden-xs hidden-sm web-only">
+				<li>
+					<a href="javascript:editme();">
+						<i class="icon-plus"></i>
+						新增條目
+					</a>
+				</li>
+			</ul>`
+		);
 	} else {
 		// Not Safulo dict. Ignore it.
 	}
