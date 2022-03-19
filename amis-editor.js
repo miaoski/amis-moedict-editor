@@ -19,25 +19,27 @@ const turnOnEditor = () => {
 				<i class="icon-edit"></i>
 				編輯本條目
 			</a>
+			<a href="javascript:editme();">
+				<i class="icon-plus"></i>
+				新增條目
+			</a>
 		`);
-		$('ul:contains("編輯本條目")').after(
-			`<ul class="nav pull-right hidden-xs hidden-sm web-only">
-				<li>
-					<a href="javascript:editme();">
-						<i class="icon-plus"></i>
-						新增條目
-					</a>
-				</li>
-			</ul>`
-		);
 	} else {
 		// Not Safulo dict. Ignore it.
 	}
 };
 
 // after dom ready
-$(function () {
-	turnOnEditor();
+$(document).ready(function () {
+	var checkExist = setInterval(function() {
+		if($('li:contains("幫校對")')) {
+			turnOnEditor();
+			clearInterval(checkExist);
+		}
+		if($('li:contains("編輯本條目")')) {
+			clearInterval(checkExist);
+		}
+	}, 100);
 });
 
 // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
