@@ -1,6 +1,6 @@
 let token = 'ghp_';
-let myrepo = 'miaoski/amis-moedict';
-let branch = 'safulo-draft';
+let myrepo = 'g0v/amis-moedict';
+let branch = 'master';
 
 const hidePage = `body > :not(.root) {
                     display: none;
@@ -70,7 +70,7 @@ window.get_lexicon = async function get_lexicon(word) {
 			Authorization: `Bearer ${token}`,
 		},
 	};
-	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json?ref=safulo-draft`;
+	url = `https://api.github.com/repos/${myrepo}/contents/docs/s/${word}.json?ref=${branch}`;
 	const res = await fetch(url, config);
 	const json = await res.json();
 
