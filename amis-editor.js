@@ -29,11 +29,6 @@ const turnOnEditor = () => {
 	}
 };
 
-// after dom ready
-$(document).ready(function () {
-	turnOnEditor();
-});
-
 // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
 function b64DecodeUnicode(str) {
 	// Going backwards: from bytestream, to percent-encoding, to original string.
@@ -121,6 +116,11 @@ window.update_lexicon = function update_lexicon(
 		.then(response => response.json())
 		.then(data => {
 			console.log('update_lexicon: Success:', data);
+			if(typeof(data.commit.sha) == 'string') {
+				alert('新增修改成功!');
+			} else {
+				alert('哦哦出錯了:', data);
+			}
 			if(onSuccess) {
 				onSuccess();
 			}
@@ -147,3 +147,9 @@ let getting = browser.storage.sync.get('token');
 getting.then(onGot, onError);
 
 exportFunction(editme, window, { defineAs: 'editme' });
+
+// after dom ready
+$(document).ready(function () {
+	turnOnEditor();
+});
+
