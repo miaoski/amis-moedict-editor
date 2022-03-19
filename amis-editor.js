@@ -31,15 +31,7 @@ const turnOnEditor = () => {
 
 // after dom ready
 $(document).ready(function () {
-	var checkExist = setInterval(function() {
-		if($('li:contains("幫校對")')) {
-			turnOnEditor();
-			clearInterval(checkExist);
-		}
-		if($('li:contains("編輯本條目")')) {
-			clearInterval(checkExist);
-		}
-	}, 100);
+	turnOnEditor();
 });
 
 // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
@@ -101,12 +93,21 @@ window.update_lexicon = function update_lexicon(
 	onSuccess,
 	onError
 ) {
-	const body_msg = {
-			'message': `Update ${word}`,
-			'content': b64EncodeUnicode(JSON.stringify(content)),
+	const this_word = (word == null || word == '') ? content['t'] : word;
+	const lower = this_word.toLowerCase();
+	var this_content = content;
+	if(lower != word) {
+		this_content['t'] = lower;
+		this_content['name'] = this_word;
+	}
+	var body_msg = {
+			'message': `Update ${this_word}`,
+			'content': b64EncodeUnicode(JSON.stringify(this_content)),
 			'branch': branch,
-			'sha': sha,
 		};
+	if(sha != null) {
+		body_msg['sha'] = sha;
+	}
 	var config = {
 		method: 'PUT',
 		headers: {
@@ -115,7 +116,7 @@ window.update_lexicon = function update_lexicon(
 		},
 		body: JSON.stringify(body_msg),
 	};
-	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${word}.json`;
+	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${this_word}.json`;
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
