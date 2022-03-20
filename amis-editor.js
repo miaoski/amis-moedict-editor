@@ -111,15 +111,19 @@ window.update_lexicon = function update_lexicon(
 		},
 		body: JSON.stringify(body_msg),
 	};
-	url = `https://api.github.com/repos/${myrepo}/contents/amis-deploy/s/${this_word}.json`;
+	url = `https://api.github.com/repos/${myrepo}/contents/docs/s/${this_word}.json`;
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
 			console.log('update_lexicon: Success:', data);
-			if(typeof(data.commit.sha) == 'string') {
-				alert('新增修改成功!');
-			} else {
+			if(data.commit == undefined) {
 				alert('哦哦出錯了:', data);
+			} else {
+				if(typeof(data.commit.sha) == 'string') {
+					alert('新增修改成功!');
+				} else {
+					alert('哦哦出錯了:', data);
+				}
 			}
 			if(onSuccess) {
 				onSuccess();
