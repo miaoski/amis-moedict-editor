@@ -5,9 +5,12 @@
   </head>
   <body>
     <form>
-        <label>Github OAuth Token: <input type="text" size=40 id="token"></label>
+	<label>Github OAuth Token:  <input type="text" size=40 id="token"></label><br />
+	<label>Repo to update to:   <input type="text" size=40 id="myrepo"></label><br />
+	<label>Branch to update to: <input type="text" size=40 id="branch"></label><br />
         <button type="submit">Save</button>
     </form>
+    <div id="msg">&nbsp;</div>
     <script src="prefs.js"></script>
   </body>
 </html>

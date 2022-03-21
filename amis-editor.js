@@ -1,3 +1,4 @@
+// Default values are to be replaced by local storage
 let token = 'ghp_';
 let myrepo = 'g0v/amis-moedict';
 let branch = 'master';
@@ -52,10 +53,10 @@ function b64EncodeUnicode(str) {
 
 function editme() {
 	if(token == 'ghp_') {
-		alert('請先修改本 add-on 的設定，填寫你的 Github API token');
-		return 0;
+		alert('請先修改本 add-on 的設定，並填寫你的 Github API token');
+	} else {
+		$('#root').show();
 	}
-	$('#root').show();
 }
 
 window.close_editor = function close_editor() {
@@ -142,12 +143,12 @@ function onError(error) {
 }
 
 function onGot(item) {
-	if(item.token) {
-		token = item.token;
-	}
+	if(item.token)  token  = item.token;
+	if(item.myrepo) myrepo = item.myrepo;
+	if(item.branch) branch = item.branch;
 }
 
-let getting = browser.storage.sync.get('token');
+let getting = browser.storage.sync.get();
 getting.then(onGot, onError);
 
 exportFunction(editme, window, { defineAs: 'editme' });
