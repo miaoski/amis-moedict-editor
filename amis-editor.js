@@ -19,11 +19,15 @@ const turnOnEditor = () => {
 			<a href="javascript:editme();">
 				<i class="icon-edit"></i>
 				編輯本條目
-			</a>
+			</a>`).parent().after(`
+			<ul class="nav pull-right hidden-xs">
+			<li>
 			<a href="javascript:editme();">
 				<i class="icon-plus"></i>
 				新增條目
 			</a>
+			</li>
+			</ul>
 		`);
 	} else {
 		// Not Safulo dict. Ignore it.
