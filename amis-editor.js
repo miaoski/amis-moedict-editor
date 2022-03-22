@@ -117,6 +117,7 @@ window.update_lexicon = function update_lexicon(
 		body: JSON.stringify(body_msg),
 	};
 	url = `https://api.github.com/repos/${myrepo}/contents/docs/s/${this_word}.json`;
+	console.log('PUT ' + url);
 	fetch(url, config)
 		.then(response => response.json())
 		.then(data => {
