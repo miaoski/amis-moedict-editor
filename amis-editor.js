@@ -93,12 +93,11 @@ window.update_lexicon = function update_lexicon(
 	onSuccess,
 	onError
 ) {
-	const this_word = (word == null || word == '') ? content['t'] : word;
-	const lower = this_word.toLowerCase();
+	const this_word = (word == null || word == '') ? content['t'] : word;	// TODO: should I lower it?
 	var this_content = content;
-	if(lower != word) {
-		this_content['t'] = lower;
-		this_content['name'] = this_word;
+	// Workaround a bug: extra "name" when adding a new lexicon
+	if(this_content['h'][0].hasOwnProperty('name')) {
+		delete this_content['h'][0]['name'];
 	}
 	var body_msg = {
 			'message': `Update ${this_word}`,
