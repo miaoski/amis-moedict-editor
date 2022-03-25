@@ -99,15 +99,13 @@ function FormHeteronym(props: Props) {
           <span>delete heteronym</span>
         </button>
       </h2>
-      {
-        // hide name field for current version
-        // <div className="field">
-        //   <label>
-        //     <span>name</span>
-        //   </label>
-        //   <input {...register(`heteronyms.${index}.name`)} />
-        // </div>
-      }
+
+      <div className="field">
+        <label>
+          <span>name</span>
+        </label>
+        <input {...register(`heteronyms.${index}.name`)} />
+      </div>
 
       {heteronym.definitions.map((definition, definitionIndex) => (
         <Definition
