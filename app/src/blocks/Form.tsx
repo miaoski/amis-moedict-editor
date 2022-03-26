@@ -73,7 +73,7 @@ function Form(props: Props) {
   return (
     <form className="App" onSubmit={handleSubmit(onSubmit)}>
       <header>
-        <h1>edit lexicon</h1>
+        <h1>編輯詞條</h1>
         <button type="button" onClick={closeForm}>
           <MdClose />
         </button>
@@ -82,7 +82,7 @@ function Form(props: Props) {
         <div id="word" className="grid">
           <div className="field">
             <label>
-              <span className="required">title</span>
+              <span className="required">單字</span>
             </label>
             <input
               readOnly={!!word}
@@ -90,11 +90,11 @@ function Form(props: Props) {
             />
           </div>
           <div className="field">
-            <label>stem (蔡中涵大辭典)</label>
+            <label>字根 (蔡中涵大辭典)</label>
             <input {...register('stem')} />
           </div>
           <div className="field">
-            <label>repetition (蔡中涵大辭典)</label>
+            <label>構詞標記 (蔡中涵大辭典)</label>
             <input {...register('repetition')} />
           </div>
         </div>
@@ -120,16 +120,16 @@ function Form(props: Props) {
           }}
         >
           <MdAdd />
-          <span>add heteronym</span>
+          <span>新增同形異義詞</span>
         </button>
         <span />
         <button type="submit" className="submit">
           <MdSave />
-          <span>save lexicon</span>
+          <span>存檔</span>
         </button>
         <button type="button" className="cancel" onClick={closeForm}>
           <MdClose />
-          <span>cancel</span>
+          <span>取消</span>
         </button>
       </footer>
     </form>

@@ -20,7 +20,7 @@ function DefinitionSynonym(props: Props) {
       <hr />
       <div className="synonym grid">
         <div className="field">
-          <label>synonym {synonymIndex + 1}</label>
+          <label>相似詞 {synonymIndex + 1}</label>
           <input {...register(synonymId)} />
         </div>
         <button

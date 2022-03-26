@@ -21,7 +21,7 @@ function DefinitionReference(props: Props) {
       <hr />
       <div className="reference grid">
         <div className="field">
-          <label>reference {referenceIndex + 1} (蔡中涵大辭典)</label>
+          <label>參見 {referenceIndex + 1} (蔡中涵大辭典)</label>
           <input {...register(referenceId)} />
         </div>
         <button

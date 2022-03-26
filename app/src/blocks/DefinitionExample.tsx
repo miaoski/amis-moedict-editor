@@ -25,15 +25,15 @@ function DefinitionExample(props: Props) {
       <hr />
       <div className="example grid">
         <div className="field">
-          <label>example {exampleIndex + 1}</label>
+          <label>例句 {exampleIndex + 1}</label>
           <input {...register(`${exampleId}.amis`)} />
         </div>
         <div className="field">
-          <label>translation (English)</label>
+          <label>英譯</label>
           <input {...register(`${exampleId}.en`)} />
         </div>
         <div className="field">
-          <label>translation (French / Mandarin)</label>
+          <label>法譯 / 漢譯</label>
           <input {...register(`${exampleId}.mandarin_fr`)} />
         </div>
         <button type="button" onClick={() => removeExample(exampleIndex)}>

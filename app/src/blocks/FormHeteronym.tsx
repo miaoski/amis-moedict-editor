@@ -86,7 +86,7 @@ function FormHeteronym(props: Props) {
             <CgChevronRight />
           </button>
         )}
-        Heteronym {index + 1}
+        同形異義詞 {index + 1}
         <span />
         <button
           type="button"
@@ -96,13 +96,13 @@ function FormHeteronym(props: Props) {
           }}
         >
           <MdWarning />
-          <span>delete heteronym</span>
+          <span>刪除同形異義詞</span>
         </button>
       </h2>
 
       <div className="field">
         <label>
-          <span>name</span>
+          <span>單字 (專有名詞，大寫開頭)</span>
         </label>
         <input {...register(`heteronyms.${index}.name`)} />
       </div>
@@ -130,7 +130,7 @@ function FormHeteronym(props: Props) {
           addDefinition();
         }}
       >
-        add definition
+        新增詞義
       </button>
     </div>
   );

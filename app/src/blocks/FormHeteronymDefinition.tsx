@@ -103,7 +103,7 @@ function FormHeteronymDefinition(props: Props) {
                 <CgChevronRight />
               </button>
             )}
-            <label className="required">definition {definitionIndex + 1}</label>
+            <label className="required">詞義 {definitionIndex + 1}</label>
             <span />
             <button
               type="button"
@@ -112,7 +112,7 @@ function FormHeteronymDefinition(props: Props) {
                 removeDefinition();
               }}
             >
-              remove definition
+              刪除本詞義
             </button>
           </div>
           <input {...register(`${definitionId}.description`)} />
@@ -144,7 +144,7 @@ function FormHeteronymDefinition(props: Props) {
                 addExample();
               }}
             >
-              add example to definition {definitionIndex + 1}
+              新增例句
             </button>
           </div>
           {definition.synonyms?.map((synonym, synonymIndex) => (
@@ -164,7 +164,7 @@ function FormHeteronymDefinition(props: Props) {
                 addDefinitionItem('synonym');
               }}
             >
-              add synonym to definition {definitionIndex + 1}
+              新增相似詞
             </button>
           </div>
           {definition.references?.map((reference, referenceIndex) => (
@@ -184,7 +184,7 @@ function FormHeteronymDefinition(props: Props) {
                 addDefinitionItem('reference');
               }}
             >
-              add reference to definition {definitionIndex + 1}
+              新增「參見」
             </button>
           </div>
         </>
