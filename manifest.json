@@ -13,9 +13,9 @@
 			"js": [
 				"jquery-3.6.0.min.js",
 				"amis-editor.js",
-				"app/build/static/js/main.f59211b3.js"
+				"app/build/static/js/main.da913b74.js"
 			],
-			"css": ["app/build/static/css/main.eb33a873.css"]
+			"css": ["app/build/static/css/main.36b87d26.css"]
 		}
 	],
 	"browser_specific_settings": {
