@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "moedict-amis-editor",
-	"version": "0.4",
+	"version": "0.5",
 	"description": "[en] An online editor of Moedict Amis. It updates Github Pages via Github API calls. You can create / edit a lexicon entry in amis.moedict.tw and submit it to Github directly. A user's Github API key can be configured in add-on's setup menu. The API key is stored on local storage and never submitted to the internet.  [zh-TW] 阿美語萌典的線上編輯器，修改的內容會上傳到 Github Pages 上。新增/修改阿美語萌典的詞條，並透過 Github API 上，傳到 Github Pages。使用者需要取得自己的 API token 並在本套件的設定頁面填入 API key。API key 會存在本地儲存，不會上傳到任何地方。",
 	"icons": {
 		"48": "icons/amis-48.png",
